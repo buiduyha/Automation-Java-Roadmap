@@ -18,12 +18,30 @@ class AutomationTest {
 
 // Cách sử dụng (Trong hàm week3_oop.Main)
 public class Main {
-    public static void main(String[] args) {
-        // Tạo "Thực thể" (Object)
-        AutomationTest loginTest = new AutomationTest();
-        loginTest.testName = "Kiểm thử đăng nhập";
 
-        loginTest.runTest();
-        loginTest.showResult();
+    // Bài 1: Bản thiết kế (Class) và Thực thể (Object)
+//    public static void main(String[] args) {
+//        // Tạo "Thực thể" (Object)
+//        AutomationTest loginTest = new AutomationTest();
+//        loginTest.testName = "Kiểm thử đăng nhập";
+//
+//        loginTest.runTest();
+//        loginTest.showResult();
+//    }
+
+    // Bài 2: Thuộc tính (Attributes) và Phương thức (Methods)
+    public static void main(String[] args) {
+        // Khởi tạo đối tượng
+        LoginAction login = new LoginAction();
+
+        // Gọi hành động
+        login.navigateToPage();
+
+        // Truyền dữ liệu thật vào hàm
+        login.performLogin("admin_user", "Admin@123");
+
+        // Lấy dữ liệu từ hàm trả về
+        String currentTitle = login.getTitle();
+        System.out.println("Tiêu đề trang hiện tại: " + currentTitle);
     }
 }
