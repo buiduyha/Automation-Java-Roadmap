@@ -1,3 +1,5 @@
+package week3_oop;
+
 // Đây là "Bản thiết kế" (Class)
 class AutomationTest {
     String testName;
@@ -14,7 +16,7 @@ class AutomationTest {
     }
 }
 
-// Cách sử dụng (Trong hàm Main)
+// Cách sử dụng (Trong hàm week3_oop.Main)
 public class Main {
     public static void main(String[] args) {
         // Tạo "Thực thể" (Object)
