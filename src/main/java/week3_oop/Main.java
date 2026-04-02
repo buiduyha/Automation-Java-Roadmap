@@ -19,7 +19,7 @@ class AutomationTest {
 // Cách sử dụng (Trong hàm week3_oop.Main)
 public class Main {
 
-    // Bài 1: Bản thiết kế (Class) và Thực thể (Object)
+//    Week 3 - Monday: Class & Object
 //    public static void main(String[] args) {
 //        // Tạo "Thực thể" (Object)
 //        AutomationTest loginTest = new AutomationTest();
@@ -29,19 +29,30 @@ public class Main {
 //        loginTest.showResult();
 //    }
 
-    // Bài 2: Thuộc tính (Attributes) và Phương thức (Methods)
-    public static void main(String[] args) {
-        // Khởi tạo đối tượng
-        LoginAction login = new LoginAction();
+// Week 3 - Tuesday: Add Attributes and Methods to LoginAction
+//    public static void main(String[] args) {
+//        // Khởi tạo đối tượng
+//        LoginAction login = new LoginAction();
+//
+//        // Gọi hành động
+//        login.navigateToPage();
+//
+//        // Truyền dữ liệu thật vào hàm
+//        login.performLogin("admin_user", "Admin@123");
+//
+//        // Lấy dữ liệu từ hàm trả về
+//        String currentTitle = login.getTitle();
+//        System.out.println("Tiêu đề trang hiện tại: " + currentTitle);
+//    }
 
-        // Gọi hành động
-        login.navigateToPage();
+   // Week 3 - Wednesday: Constructor
+   public static void main(String[] args) {
+       // Vừa tạo ra là đã có URL bên trong
+       LoginAction loginStaging = new LoginAction("https://staging.example.com");
+       loginStaging.navigate();
 
-        // Truyền dữ liệu thật vào hàm
-        login.performLogin("admin_user", "Admin@123");
+       LoginAction loginProduction = new LoginAction("https://example.com");
+       loginProduction.navigate();
+   }
 
-        // Lấy dữ liệu từ hàm trả về
-        String currentTitle = login.getTitle();
-        System.out.println("Tiêu đề trang hiện tại: " + currentTitle);
-    }
 }
