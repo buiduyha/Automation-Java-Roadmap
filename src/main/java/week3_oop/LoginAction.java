@@ -32,16 +32,35 @@ package week3_oop;
 //}
 
 // Week 3 - Wednesday: Constructor
-public class LoginAction {
-    String url;
+//public class LoginAction {
+//    String url;
+//
+//    // Đây là Constructor
+//    public LoginAction(String inputUrl) {
+//        this.url = inputUrl; // Gán giá trị ngay khi vừa sinh ra
+//        System.out.println("Khởi tạo trang với URL: " + url);
+//    }
+//
+//    public void navigate() {
+//        System.out.println("Đang truy cập: " + this.url);
+//    }
+//}
 
-    // Đây là Constructor
+// Week 3 - Thursday: Access Modifiers
+public class LoginAction {
+    // Dùng private để "nhốt" biến này lại, không cho bên ngoài sửa bừa bãi
+    private String url;
+
     public LoginAction(String inputUrl) {
-        this.url = inputUrl; // Gán giá trị ngay khi vừa sinh ra
-        System.out.println("Khởi tạo trang với URL: " + url);
+        this.url = inputUrl;
     }
 
     public void navigate() {
-        System.out.println("Đang truy cập: " + this.url);
+        System.out.println("Đang truy cập an toàn vào: " + this.url);
+    }
+
+    // Nếu bên ngoài muốn lấy URL để xem, họ phải qua một cái "cửa sổ" (Getter)
+    public String getUrl() {
+        return this.url;
     }
 }
