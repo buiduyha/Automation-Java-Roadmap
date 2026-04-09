@@ -23,7 +23,7 @@ public class TestRunner {
     }
 
     public static void runTest(BasePage anyPage) {
-        anyPage.waitForPageLoaded();
+//        anyPage.waitForPageLoaded();
         anyPage.clickElement("Main Button");
     }
 }
