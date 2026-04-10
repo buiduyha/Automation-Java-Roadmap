@@ -1,5 +1,9 @@
 package week4_inheritance;
 
+import com.srv.base.BasePage;
+import com.srv.pages.LoginPage;
+import com.srv.pages.RegisterPage;
+
 public class TestRunner {
     public static void main(String[] args) {
 //        // 1. Đa hình: Biến là Cha (BasePage), nhưng thực thể là Con (LoginPage)

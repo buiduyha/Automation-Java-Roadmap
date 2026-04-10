@@ -1,4 +1,4 @@
-package week4_inheritance;
+package com.srv.base;
 
 //public class BasePage {
 //    // Thuộc tính chung
@@ -24,6 +24,10 @@ public abstract class BasePage {
 
     public void clickElement(String name) {
         System.out.println("Clicking: " + name);
+    }
+
+    public void sendKeys(String elementName, String value) {
+        System.out.println("Entering '" + value + "' into: " + elementName);
     }
 
     // Hàm trừu tượng: Không có nội dung {}, kết thúc bằng dấu ;
