@@ -4,9 +4,9 @@ import com.srv.base.BasePage;
 
 public class LoginPage extends BasePage {
     // 1. Locator - Đóng gói kín bằng private
-    private String txtUsername = "user-name";
-    private String txtPassword = "password";
-    private String btnLogin = "login-button";
+    private String txtUsername = "id=user-name";
+    private String txtPassword = "id=password";
+    private String btnLogin = "name=login-button";
 
     // 2. Thực hiện cam kết từ cha (Abstract method)
     @Override

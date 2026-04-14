@@ -39,16 +39,29 @@ public abstract class BasePage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    // Thay thế hàm giả lập bằng Selenium thật
+    // Hàm bổ trợ để chuyển đổi String Locator thành đối tượng By của Selenium
+    private By getBy(String locator) {
+        if (locator.startsWith("id=")) {
+            return By.id(locator.replace("id=", ""));
+        } else if (locator.startsWith("name=")) {
+            return By.name(locator.replace("name=", ""));
+        } else if (locator.startsWith("css=")) {
+            return By.cssSelector(locator.replace("css=", ""));
+        } else if (locator.startsWith("xpath=")) {
+            return By.xpath(locator.replace("xpath=", ""));
+        } else {
+            return By.id(locator); // Mặc định là ID nếu không ghi gì
+        }
+    }
+
+    // Cập nhật lại các hàm click và sendKeys
     public void clickElement(String locator) {
-        System.out.println("[Selenium] Clicking: " + locator);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id(locator.replace("id=", ""))));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(getBy(locator)));
         element.click();
     }
 
     public void sendKeys(String locator, String value) {
-        System.out.println("[Selenium] Typing '" + value + "' into: " + locator);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(locator.replace("id=",""))));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(getBy(locator)));
         element.clear();
         element.sendKeys(value);
     }
