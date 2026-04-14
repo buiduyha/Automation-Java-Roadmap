@@ -3,19 +3,20 @@ package com.srv.pages;
 import com.srv.base.BasePage;
 
 public class LoginPage extends BasePage {
-    // 1. Dùng private để đóng gói Locator (Encapsulation)
-    private String txtUsername = "id=user";
-    private String txtPassword = "id=pass";
-    private String btnLogin = "xpath=//button";
+    // 1. Locator - Đóng gói kín bằng private
+    private String txtUsername = "id=txt-username";
+    private String txtPassword = "id=txt-password";
+    private String btnLogin = "id=btn-login";
 
-    // 2. Thực hiện "Hợp đồng" từ BasePage (Abstract)
+    // 2. Thực hiện cam kết từ cha (Abstract method)
     @Override
     public void waitPageLoaded() {
-        System.out.println("Đang đợi trang Login tải xong các phần tử...");
+        System.out.println("[POM] Đợi trang Login hiển thị hoàn tất...");
     }
 
-    // 3. Nghiệp vụ (Action)
-    public void performLogin(String user, String pass) {
+    // 3. Hành động (Method) - Chỉ lộ ra nghiệp vụ cho bên ngoài dùng
+    public void loginToSystem(String user, String pass) {
+        System.out.println("--- Thực hiện luồng Login ---");
         sendKeys(txtUsername, user);
         sendKeys(txtPassword, pass);
         clickElement(btnLogin);
