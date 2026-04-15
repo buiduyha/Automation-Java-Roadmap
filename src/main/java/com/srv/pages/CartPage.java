@@ -1,20 +1,23 @@
 package com.srv.pages;
 
 import com.srv.base.BasePage;
+import org.openqa.selenium.By;
 
 public class CartPage extends BasePage {
+    private String lblProductName = "xpath=//div[@class='inventory_item_name']";
     private String btnCheckout = "id=checkout";
-//    private String btnCheckout = "xpath=//button[@id='checkout']";
-//    private String btnCheckout = "xpath=//button[@class='btn btn_action btn_medium checkout_button']";
-//    private String btnCheckout = "xpath=//button[contains(@name, 'checkout')]";
-//    private String btnCheckout = "xpath=//button[text()='Checkout']";
 
     @Override
     public void waitPageLoaded() {
+        System.out.println("Đang kiểm tra giỏ hàng...");
     }
 
-    public void checkout() {
+    // Hàm lấy tên sản phẩm để Assert (Kiểm tra)
+    public String getProductNameInCart() {
+        return getElementText(lblProductName);
+    }
+
+    public void clickCheckout() {
         clickElement(btnCheckout);
-        System.out.println("Chuyển sang bước thanh toán");
     }
 }

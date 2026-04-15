@@ -1,6 +1,8 @@
 package com.srv.tests;
 
 import com.srv.base.BasePage;
+import com.srv.pages.CartPage;
+import com.srv.pages.InventoryPage;
 import com.srv.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,6 +22,16 @@ public class EndToEndTest {
         LoginPage login = new LoginPage();
         login.waitPageLoaded();
         login.loginToSystem("standard_user", "secret_sauce");
+
+        InventoryPage inventoryPage = new InventoryPage();
+        inventoryPage.waitPageLoaded();
+        inventoryPage.addProductToCart();
+        inventoryPage.checkout();
+
+        CartPage cartPage = new CartPage();
+        cartPage.waitPageLoaded();
+        System.out.println("Sản phẩm trong giỏ là: " + cartPage.getProductNameInCart());
+        cartPage.clickCheckout();
 
         System.out.println("=== TEST TRÊN TRÌNH DUYỆT THẬT THÀNH CÔNG ===");
 

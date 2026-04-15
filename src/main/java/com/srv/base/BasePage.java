@@ -66,6 +66,11 @@ public abstract class BasePage {
         element.sendKeys(value);
     }
 
+    public String getElementText(String locator){
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(getBy(locator)));
+        return element.getText();
+    }
+
     // Hàm trừu tượng: Không có nội dung {}, kết thúc bằng dấu ;
     // Bắt buộc mọi Class con phải tự định nghĩa logic này
     public abstract void waitPageLoaded();

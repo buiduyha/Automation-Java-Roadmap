@@ -17,4 +17,9 @@ public class InventoryPage extends BasePage {
         clickElement(btnAddToCart);
         System.out.println("Đã thêm sản phẩm vào giỏ hàng thành công!");
     }
+
+    public void checkout() {
+        clickElement(iconShoppingCart);
+        System.out.println("Chuyển sang màn giỏ hàng");
+    }
 }
