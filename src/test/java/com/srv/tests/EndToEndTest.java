@@ -25,13 +25,15 @@ public class EndToEndTest {
 
         InventoryPage inventoryPage = new InventoryPage();
         inventoryPage.waitPageLoaded();
-        inventoryPage.addProductToCart();
-        inventoryPage.checkout();
-
-        CartPage cartPage = new CartPage();
-        cartPage.waitPageLoaded();
-        System.out.println("Sản phẩm trong giỏ là: " + cartPage.getProductNameInCart());
-        cartPage.clickCheckout();
+        inventoryPage.count();
+        inventoryPage.printAllProductNames();
+//        inventoryPage.addProductToCart();
+//        inventoryPage.checkout();
+//
+//        CartPage cartPage = new CartPage();
+//        cartPage.waitPageLoaded();
+//        System.out.println("Sản phẩm trong giỏ là: " + cartPage.getProductNameInCart());
+//        cartPage.clickCheckout();
 
         System.out.println("=== TEST TRÊN TRÌNH DUYỆT THẬT THÀNH CÔNG ===");
 

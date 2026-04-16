@@ -1,7 +1,6 @@
 package com.srv.pages;
 
 import com.srv.base.BasePage;
-import org.openqa.selenium.By;
 
 public class CartPage extends BasePage {
     private String lblProductName = "xpath=//div[@class='inventory_item_name']";

@@ -25,6 +25,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 // Week 4 - Thursday - Abstract Class
 // Thêm từ khóa abstract
@@ -69,6 +71,21 @@ public abstract class BasePage {
     public String getElementText(String locator){
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(getBy(locator)));
         return element.getText();
+    }
+
+    // Lấy danh sách các WebElements
+    public List<WebElement> getWebElements(String locator) {
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(getBy(locator)));
+    }
+
+    // Lấy danh sách Text của tất cả phần tử (Ví dụ: Lấy tên tất cả sản phẩm)
+    public List<String> getAllElementText(String locator) {
+        List<WebElement> elements = getWebElements(locator);
+        List<String> texts = new ArrayList<>();
+        for (WebElement element : elements) {
+            texts.add(element.getText());
+        }
+        return texts;
     }
 
     // Hàm trừu tượng: Không có nội dung {}, kết thúc bằng dấu ;
