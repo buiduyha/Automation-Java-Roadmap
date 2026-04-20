@@ -4,8 +4,10 @@ import com.srv.base.BasePage;
 import com.srv.pages.CartPage;
 import com.srv.pages.InventoryPage;
 import com.srv.pages.LoginPage;
+import com.srv.pages.PaymentPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 public class EndToEndTest {
     public static void main(String[] args) {
@@ -25,18 +27,27 @@ public class EndToEndTest {
 
         InventoryPage inventoryPage = new InventoryPage();
         inventoryPage.waitPageLoaded();
-        inventoryPage.count();
         inventoryPage.printAllProductNames();
-//        inventoryPage.addProductToCart();
-//        inventoryPage.checkout();
-//
-//        CartPage cartPage = new CartPage();
-//        cartPage.waitPageLoaded();
-//        System.out.println("Sản phẩm trong giỏ là: " + cartPage.getProductNameInCart());
-//        cartPage.clickCheckout();
+        inventoryPage.addProductToCart();
+        inventoryPage.addProductToCart();
+        inventoryPage.checkout();
+
+        CartPage cartPage = new CartPage();
+        cartPage.waitPageLoaded();
+        String actualProductName = cartPage.getProductNameInCart().get(0).getText();
+        String expectedProductName = "Sauce Labs Backpack";
+        Assert.assertEquals(actualProductName, expectedProductName, "LỖI: Tên sản phẩm trong giỏ không khớp!");
+        actualProductName = cartPage.getProductNameInCart().get(1).getText();
+        expectedProductName = "Sauce Labs Bike Light";
+        Assert.assertEquals(actualProductName, expectedProductName, "LỖI: Tên sản phẩm trong giỏ không khớp!");
+        cartPage.clickCheckout();
+
+        PaymentPage paymentPage = new PaymentPage();
+        paymentPage.waitPageLoaded();
+        paymentPage.payment("Nguyen Van A", "100000");
 
         System.out.println("=== TEST TRÊN TRÌNH DUYỆT THẬT THÀNH CÔNG ===");
 
-//        driver.quit(); // Tạm thời comment lại để bạn ngắm kết quả trên trình duyệt
+        BasePage.quitDriver(); // Tạm thời comment lại để bạn ngắm kết quả trên trình duyệt
     }
 }
