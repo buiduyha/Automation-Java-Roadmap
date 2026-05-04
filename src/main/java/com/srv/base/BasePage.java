@@ -21,6 +21,7 @@ package com.srv.base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,11 +35,13 @@ public abstract class BasePage {
     // Biến static để tất cả các Page con dùng chung 1 trình duyệt
     protected static WebDriver driver;
     protected static WebDriverWait wait;
+    protected static Actions actions;
 
     // Hàm thiết lập driver (Sẽ gọi từ Test)
     public static void setDriver(WebDriver webDriver) {
         driver = webDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        BasePage.actions = new Actions(driver);
     }
 
     // Hàm bổ trợ để chuyển đổi String Locator thành đối tượng By của Selenium
@@ -100,11 +103,26 @@ public abstract class BasePage {
         wait.until(ExpectedConditions.titleContains(title));
         System.out.println("[Wait] Page title is now: " + driver.getTitle());
     }
+
     public static void quitDriver() {
         if (driver != null) {
             driver.quit();
             System.out.println("[Selenium] Browser closed.");
         }
+    }
+
+    // Hàm di chuột vào một phần tử
+    public void hoverElement(String locator) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(getBy(locator)));
+        actions.moveToElement(element).perform();
+        System.out.println("[Actions] Hovered over: " + locator);
+    }
+
+    // Hàm click chuột phải
+    public void rightClickElement(String locator){
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(getBy(locator)));
+        actions.contextClick(element).perform();
+        System.out.println("[Actions] Right click: " + locator);
     }
 
     // Hàm trừu tượng: Không có nội dung {}, kết thúc bằng dấu ;

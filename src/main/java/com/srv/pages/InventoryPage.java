@@ -22,6 +22,9 @@ public class InventoryPage extends BasePage {
         System.out.println("Đã thêm sản phẩm vào giỏ hàng thành công!");
     }
 
+    public void hoverShoppingCart(){
+        hoverElement(iconShoppingCart);
+    }
     public void checkout() {
         clickElement(iconShoppingCart);
         System.out.println("Chuyển sang màn giỏ hàng");

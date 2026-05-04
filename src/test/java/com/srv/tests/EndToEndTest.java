@@ -7,12 +7,30 @@ import com.srv.pages.LoginPage;
 import com.srv.pages.PaymentPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class EndToEndTest {
     public static void main(String[] args) {
         // 1. Khởi tạo trình duyệt
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+
+        // 1. Tắt tính năng lưu mật khẩu và kiểm tra rò rỉ mật khẩu
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("password_manager_enabled", false);
+        options.setExperimentalOption("prefs", prefs);
+
+        // 2. Chặn các thanh thông báo khó chịu của Chrome
+        options.addArguments("--incognito");
+        options.addArguments("--disable-features=AutofillPasswordLeakDetection");
+        options.addArguments("--disable-notifications");
+
+        // Khởi tạo driver với options đã cấu hình
+        WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
 
         // 2. Bơm driver vào hệ thống BasePage
@@ -31,6 +49,7 @@ public class EndToEndTest {
         inventoryPage.printAllProductNames();
         inventoryPage.addProductToCart();
         inventoryPage.addProductToCart();
+        inventoryPage.hoverShoppingCart();
         inventoryPage.checkout();
 
         CartPage cartPage = new CartPage();
@@ -45,7 +64,7 @@ public class EndToEndTest {
 
         PaymentPage paymentPage = new PaymentPage();
         paymentPage.waitPageLoaded();
-        paymentPage.payment("Nguyen Van A", "100000");
+        paymentPage.payment("A","Nguyen Van A", "100000");
 
         System.out.println("=== TEST TRÊN TRÌNH DUYỆT THẬT THÀNH CÔNG ===");
 
