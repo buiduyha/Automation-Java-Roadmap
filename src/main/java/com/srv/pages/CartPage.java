@@ -1,6 +1,9 @@
 package com.srv.pages;
 
 import com.srv.base.BasePage;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class CartPage extends BasePage {
     private String lblProductName = "xpath=//div[@class='inventory_item_name']";
@@ -12,8 +15,8 @@ public class CartPage extends BasePage {
     }
 
     // Hàm lấy tên sản phẩm để Assert (Kiểm tra)
-    public String getProductNameInCart() {
-        return getElementText(lblProductName);
+    public List<WebElement> getProductNameInCart() {
+        return getWebElements(lblProductName);
     }
 
     public void clickCheckout() {

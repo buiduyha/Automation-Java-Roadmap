@@ -100,6 +100,13 @@ public abstract class BasePage {
         wait.until(ExpectedConditions.titleContains(title));
         System.out.println("[Wait] Page title is now: " + driver.getTitle());
     }
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            System.out.println("[Selenium] Browser closed.");
+        }
+    }
+
     // Hàm trừu tượng: Không có nội dung {}, kết thúc bằng dấu ;
     // Bắt buộc mọi Class con phải tự định nghĩa logic này
     public abstract void waitPageLoaded();
