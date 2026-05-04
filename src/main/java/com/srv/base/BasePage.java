@@ -59,17 +59,19 @@ public abstract class BasePage {
     // Cập nhật lại các hàm click và sendKeys
     public void clickElement(String locator) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(getBy(locator)));
+        System.out.println("[Selenium] Clicking: " + locator);
         element.click();
     }
 
     public void sendKeys(String locator, String value) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(getBy(locator)));
+        System.out.println("[Selenium] Typing '" + value + "' into: " + locator);
         element.clear();
         element.sendKeys(value);
     }
 
-    public String getElementText(String locator){
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(getBy(locator)));
+    public String getElementText(String locator) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(getBy(locator)));
         return element.getText();
     }
 
@@ -88,6 +90,16 @@ public abstract class BasePage {
         return texts;
     }
 
+    public void waitForElementInvisible(String locator) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(getBy(locator)));
+        System.out.println("[Wait] Loading spinner has disappeared!");
+    }
+
+    public void waitForPageTitle(String title) {
+        // Đợi cho đến khi tiêu đề chứa đoạn text mong muốn
+        wait.until(ExpectedConditions.titleContains(title));
+        System.out.println("[Wait] Page title is now: " + driver.getTitle());
+    }
     // Hàm trừu tượng: Không có nội dung {}, kết thúc bằng dấu ;
     // Bắt buộc mọi Class con phải tự định nghĩa logic này
     public abstract void waitPageLoaded();

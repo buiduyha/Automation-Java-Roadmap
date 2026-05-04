@@ -22,6 +22,7 @@ public class EndToEndTest {
         LoginPage login = new LoginPage();
         login.waitPageLoaded();
         login.loginToSystem("standard_user", "secret_sauce");
+        login.waitForPageTitle("Swag Labs");
 
         InventoryPage inventoryPage = new InventoryPage();
         inventoryPage.waitPageLoaded();
