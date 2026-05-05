@@ -18,6 +18,7 @@ package com.srv.base;
 //    }
 //}
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -119,10 +120,26 @@ public abstract class BasePage {
     }
 
     // Hàm click chuột phải
-    public void rightClickElement(String locator){
+    public void rightClickElement(String locator) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(getBy(locator)));
         actions.contextClick(element).perform();
         System.out.println("[Actions] Right click: " + locator);
+    }
+
+    public void handleAlert(boolean accept) {
+        // Đợi cho đến khi Alert thực sự xuất hiện (tối đa 10s)
+        wait.until(ExpectedConditions.alertIsPresent());
+
+        Alert alert = driver.switchTo().alert();
+        String alertText = alert.getText();
+
+        if (accept) {
+            alert.accept();
+            System.out.println("[Alert] Accepted: " + alertText);
+        } else {
+            alert.dismiss();
+            System.out.println("[Alert] Dismissed: " + alertText);
+        }
     }
 
     // Hàm trừu tượng: Không có nội dung {}, kết thúc bằng dấu ;
