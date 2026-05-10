@@ -5,6 +5,8 @@ import com.srv.pages.CartPage;
 import com.srv.pages.InventoryPage;
 import com.srv.pages.LoginPage;
 import com.srv.pages.PaymentPage;
+import com.srv.utils.JsonUtils;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -39,10 +41,7 @@ public class EndToEndTest {
         // 3. Bắt đầu kịch bản
         driver.get("https://www.saucedemo.com/");
 
-        LoginPage login = new LoginPage();
-        login.waitPageLoaded();
-        login.loginToSystem("standard_user", "secret_sauce");
-        login.waitForPageTitle("Swag Labs");
+        testLoginWithJson();
 
         InventoryPage inventoryPage = new InventoryPage();
         inventoryPage.waitPageLoaded();
@@ -69,5 +68,22 @@ public class EndToEndTest {
         System.out.println("=== TEST TRÊN TRÌNH DUYỆT THẬT THÀNH CÔNG ===");
 
         BasePage.quitDriver(); // Tạm thời comment lại để bạn ngắm kết quả trên trình duyệt
+    }
+
+    @org.testng.annotations.Test
+    public static void testLoginWithJson() {
+        // 1. Lấy dữ liệu từ file JSON
+        String path = "src/test/resources/account.json";
+        JSONObject data = JsonUtils.getJsonData(path);
+
+        // 2. Trích xuất giá trị theo Key
+        String user = (String) data.get("username");
+        String pass = (String) data.get("password");
+
+        // 3. Thực hiện các bước Test
+        LoginPage login = new LoginPage();
+        login.loginToSystem(user, pass);
+
+        System.out.println("Đã đăng nhập với tài khoản: " + user);
     }
 }
