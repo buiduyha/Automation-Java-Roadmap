@@ -2,7 +2,7 @@ package com.srv.pages;
 
 import com.srv.base.BasePage;
 
-public class PaymentPage extends BasePage {
+public class CheckoutPage extends BasePage {
     private String txtFirstName = "id=first-name";
     private String txtLastName = "id=last-name";
     private String txtZipCode = "id=postal-code";

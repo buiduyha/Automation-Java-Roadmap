@@ -9,7 +9,7 @@ public class LoginTest {
 
         // 2. Chạy kịch bản
         loginPage.waitPageLoaded();
-        loginPage.loginToSystem("admin_vinfast", "Pass12345");
+        loginPage.login("admin_vinfast", "Pass12345");
 
         // 3. Kiểm tra kết quả (Sau này sẽ dùng TestNG/JUnit Assert)
         System.out.println("ASSERT: Kiểm tra xem Dashboard đã hiển thị chưa...");

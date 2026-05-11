@@ -15,7 +15,7 @@ public class LoginPage extends BasePage {
     }
 
     // 3. Hành động (Method) - Chỉ lộ ra nghiệp vụ cho bên ngoài dùng
-    public void loginToSystem(String user, String pass) {
+    public void login(String user, String pass) {
         System.out.println("--- Thực hiện luồng Login ---");
         sendKeys(txtUsername, user);
         sendKeys(txtPassword, pass);

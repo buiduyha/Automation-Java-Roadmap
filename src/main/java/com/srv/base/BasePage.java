@@ -70,6 +70,7 @@ public abstract class BasePage {
     public void clickElement(String locator) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(getBy(locator)));
         System.out.println("[Selenium] Clicking: " + locator);
+        highlightElement(locator);
         element.click();
     }
 
@@ -176,6 +177,8 @@ public abstract class BasePage {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(getBy(locator)));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].style.border='3px solid red'", element);
+        slowDown(500); // Đợi một chút để nhìn thấy
+        js.executeScript("arguments[0].style.border='0px'", element); // Tắt viền
     }
 
     // Hàm loại bỏ 1 thuộc tính của phần tử để phục vụ test

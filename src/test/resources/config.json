@@ -1,0 +1,16 @@
+{
+  "env": {
+    "url": "https://www.saucedemo.com/",
+    "timeout": 10
+  },
+  "user_data": {
+    "valid_user": {
+      "username": "standard_user",
+      "password": "secret_sauce"
+    },
+    "locked_user": {
+      "username": "locked_out_user",
+      "password": "secret_sauce"
+    }
+  }
+}
