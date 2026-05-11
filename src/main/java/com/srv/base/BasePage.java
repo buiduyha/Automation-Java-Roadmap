@@ -18,10 +18,7 @@ package com.srv.base;
 //    }
 //}
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -57,6 +54,15 @@ public abstract class BasePage {
             return By.xpath(locator.replace("xpath=", ""));
         } else {
             return By.id(locator); // Mặc định là ID nếu không ghi gì
+        }
+    }
+
+    // Làm chậm trình duyệt để quan sát
+    public void slowDown(int miliseconds) {
+        try {
+            Thread.sleep(miliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -140,6 +146,43 @@ public abstract class BasePage {
             alert.dismiss();
             System.out.println("[Alert] Dismissed: " + alertText);
         }
+    }
+
+    // Hàm click bằng JavaScript (Vượt qua mọi rào cản bị che khuất)
+    public void clickByJS(String locator) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(getBy(locator)));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", element);
+        System.out.println("[JS] Force clicked: " + locator);
+    }
+
+    // Hàm cuộn trang xuống cuối
+    public void scrollToBottom() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    // Hàm cuộn đến phần tử
+    public void scrollToElement(String locator) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(getBy(locator)));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        // 'true' nghĩa là cuộn sao cho element nằm ở mép trên của màn hình
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        System.out.println("[JS] Scrolled to: " + locator);
+    }
+
+    // Hàm "Highlight" element (Rất hữu ích khi demo)
+    public void highlightElement(String locator) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(getBy(locator)));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].style.border='3px solid red'", element);
+    }
+
+    // Hàm loại bỏ 1 thuộc tính của phần tử để phục vụ test
+    public void removeAttribute(String locator, String attributeName) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(getBy(locator)));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].removeAttribute('" + attributeName + "');", element);
     }
 
     // Hàm trừu tượng: Không có nội dung {}, kết thúc bằng dấu ;
